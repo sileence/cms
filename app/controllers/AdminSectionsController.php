@@ -11,16 +11,17 @@ class AdminSectionsController extends \BaseController {
         'menu_order' => 'integer'
     );
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        return View::make('admin/sections/list');
-	}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $sections = Section::search(Input::all());
 
+        return View::make('admin/sections/list', compact('sections'));
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -31,7 +32,6 @@ class AdminSectionsController extends \BaseController {
 	{
         return View::make('admin/sections/create');
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
