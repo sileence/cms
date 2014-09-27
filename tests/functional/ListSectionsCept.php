@@ -13,7 +13,7 @@ $I->amOnPage('admin/sections');
 $first = $sections->first();
 
 $I->see('Sections', 'h1');
-$I->see('There are 10 sections');
+$I->see('There are 10 sections, showing page 1 of 1');
 $I->see($first->name, 'tbody tr:first-child td.name');
 $I->see($sections->last()->name, 'tbody tr:last-child td.name');
 

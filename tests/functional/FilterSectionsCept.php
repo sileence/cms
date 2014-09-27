@@ -21,7 +21,7 @@ $I->click('Filter sections');
 $I->seeCurrentUrlEquals('/admin/sections?search=company&published=1&menu=');
 $I->expect('not to see the our company record');
 // Then
-$I->see('There are 0 sections');
+$I->see('There are no sections, please create the first one');
 $I->dontSee('Our company', 'td.name');
 $I->seeInField('search', 'company');
 
@@ -31,7 +31,7 @@ $I->selectOption('menu', '0');
 // And
 $I->click('Filter sections');
 // Then
-$I->see('There are 0 sections');
+$I->see('There are no sections, please create the first one');
 $I->dontSee('Our company', 'td.name');
 
 // When

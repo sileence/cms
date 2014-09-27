@@ -18,7 +18,7 @@ class AdminSectionsController extends \BaseController {
      */
     public function index()
     {
-        $sections = Section::search(Input::all());
+        $sections = Section::search(Input::all(), Base::PAGINATE);
 
         return View::make('admin/sections/list', compact('sections'));
     }
