@@ -2,6 +2,7 @@
 
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Collection;
+use Cms\Section\Section;
 
 class SectionsSeeder extends Seeder {
 

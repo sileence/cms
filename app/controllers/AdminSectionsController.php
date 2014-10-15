@@ -1,5 +1,7 @@
 <?php
 
+use Cms\Section\SectionRepo;
+
 class AdminSectionsController extends \BaseController {
 
     protected $rules = array(
@@ -11,6 +13,13 @@ class AdminSectionsController extends \BaseController {
         'menu_order' => 'integer'
     );
 
+    protected $sectionRepo;
+
+    public function __construct(SectionRepo $sectionRepo)
+    {
+        $this->sectionRepo = $sectionRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +27,7 @@ class AdminSectionsController extends \BaseController {
      */
     public function index()
     {
-        $sections = Section::search(Input::all(), Base::PAGINATE);
+        $sections = $this->sectionRepo->search(Input::all(), \Cms\Base\BaseRepo::PAGINATE);
 
         return View::make('admin/sections/list', compact('sections'));
     }
@@ -46,7 +55,7 @@ class AdminSectionsController extends \BaseController {
 
         if ($validator->passes())
         {
-            $section = Section::create($data);
+            $section = $this->sectionRepo->create($data);
             return Redirect::to('admin/sections/'. $section->id);
         }
         else
@@ -56,7 +65,6 @@ class AdminSectionsController extends \BaseController {
 
 	}
 
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -65,7 +73,7 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-        $section = Section::findOrFail($id);
+        $section = $this->sectionRepo->findOrFail($id);
         return View::make('admin/sections/show')->with('section', $section);
 	}
 
@@ -78,7 +86,7 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-        $section = Section::findOrFail($id);
+        $section = $this->sectionRepo->findOrFail($id);
         return View::make('admin/sections/edit')->with('section', $section);
 	}
 
@@ -90,7 +98,7 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-        $section = Section::findOrFail($id);
+        $section = $this->sectionRepo->findOrFail($id);
 
         $data = Input::all();
 
@@ -98,8 +106,7 @@ class AdminSectionsController extends \BaseController {
 
         if ($validator->passes())
         {
-            $section->fill($data);
-            $section->save();
+            $section = $this->sectionRepo->update($section, $data);
             return Redirect::route('admin.sections.show', $section->id);
         }
         else
@@ -117,9 +124,7 @@ class AdminSectionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-        $section = Section::findOrFail($id);
-        $section->delete();
-
+        $this->sectionRepo->delete($id);
         return Redirect::route('admin.sections.index');
 	}
 

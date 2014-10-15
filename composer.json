@@ -7,10 +7,12 @@
 		"laravel/framework": "4.2.*"
 	},
 	"autoload": {
+        "psr-4": {
+            "Cms\\": "app/Cms"
+        },
 		"classmap": [
 			"app/commands",
 			"app/controllers",
-			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
