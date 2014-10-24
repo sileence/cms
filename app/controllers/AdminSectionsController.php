@@ -1,21 +1,12 @@
 <?php
 
-use Cms\Section\SectionRepo;
+use Cms\Section\SectionRepoInterface;
 
 class AdminSectionsController extends \BaseController {
 
-    protected $rules = array(
-        'name'     => 'required',
-        'slug_url' => 'required',
-        'type'     => 'required|in:page,blog',
-        'menu'     => 'in:1,0',
-        'published' => 'in:1,0',
-        'menu_order' => 'integer'
-    );
-
     protected $sectionRepo;
 
-    public function __construct(SectionRepo $sectionRepo)
+    public function __construct(SectionRepoInterface $sectionRepo)
     {
         $this->sectionRepo = $sectionRepo;
     }

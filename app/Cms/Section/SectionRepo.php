@@ -2,7 +2,8 @@
 
 use Cms\Base\BaseRepo;
 
-class SectionRepo extends BaseRepo {
+class SectionRepo extends BaseRepo implements SectionRepoInterface
+{
 
     public function getModel()
     {
@@ -15,5 +16,4 @@ class SectionRepo extends BaseRepo {
     {
         $q->where('name', 'LIKE', "%$value%"); // Input::get('search')
     }
-
 }
