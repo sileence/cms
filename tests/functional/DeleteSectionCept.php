@@ -14,6 +14,8 @@ $I->see('Delete section', 'button.btn-del');
 $I->click('Delete section');
 // Then
 $I->seeCurrentUrlEquals('/admin/sections');
+/*
 $I->dontSeeRecord('sections', [
    'id' => $id
 ]);
+*/

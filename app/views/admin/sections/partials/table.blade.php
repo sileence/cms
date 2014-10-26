@@ -17,7 +17,7 @@
             <td>{{ $section->published ? 'Published' : 'Draft' }}</td>
             <td>
                 <a href="{{ route('admin.sections.show', $section->id) }}">Show</a>
-                <a href="{{ route('admin.sections.edit', $section->id) }}">Edit</a>
+                <a href="{{ route('admin.sections.edit', $section->id) }}" class="btn-edit">Edit section</a>
             </td>
         </tr>
     @endforeach

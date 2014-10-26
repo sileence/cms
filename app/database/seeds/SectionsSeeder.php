@@ -1,10 +1,22 @@
 <?php
 
+use Cms\Section\SectionRepoInterface;
 use Faker\Factory as Faker;
 use Illuminate\Database\Eloquent\Collection;
 use Cms\Section\Section;
 
 class SectionsSeeder extends Seeder {
+
+    /**
+     * @var SectionRepoInterface
+     */
+    private $sectionRepo;
+
+    public function __construct(SectionRepoInterface $sectionRepo)
+    {
+
+        $this->sectionRepo = $sectionRepo;
+    }
 
     public function run()
     {
@@ -21,7 +33,7 @@ class SectionsSeeder extends Seeder {
         {
             $name = $faker->unique()->sentence(2);
 
-            $sections->add(Section::create([
+            $sections->add($this->sectionRepo->create([
                 'name' => $name,
                 'slug_url' => \Str::slug($name),
                 'type' => $faker->randomElement(['page', 'blog']),

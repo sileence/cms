@@ -45,7 +45,7 @@ abstract class BaseRepo {
         return $this->getModel()->create($data);
     }
 
-    public function update(BaseEntity $entity, array $data)
+    public function update($entity, array $data)
     {
         $entity->fill($data);
         $entity->save();
